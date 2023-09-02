@@ -10,6 +10,11 @@ export const CardContainer = styled.div`
     margin-top: -94px;
     z-index: 2;
     gap: 2rem;
+
+    .profile {
+        width: 148px;
+        border-radius: 8px;
+    }
 `;
 
 export const CardInfo = styled.div`
@@ -58,5 +63,12 @@ export const SocialMedia = styled.div`
 
     span {
         color: ${(props) => props.theme["base-subtitle"]};
+    }
+
+    .github-profile {
+        display: flex;
+        text-decoration: none;
+        align-items: center;
+        gap: 0.5rem;
     }
 `;

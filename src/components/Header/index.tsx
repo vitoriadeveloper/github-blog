@@ -1,4 +1,4 @@
-import { CardProfile } from "../Card";
+import { CardProfile } from "../CardProfile";
 import { HeaderCover, HeaderContainer } from "./styles";
 
 export function Header() {
