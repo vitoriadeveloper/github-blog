@@ -14,7 +14,11 @@ import coment from "../../assets/coment.svg";
 import calendar from "../../assets/calendar.svg";
 import github from "../../assets/github.svg";
 import { Link } from "react-router-dom";
+import { useContext } from "use-context-selector";
+import { PostContext } from "../../contexts/PostContext";
 export function About() {
+    const { userData } = useContext(PostContext);
+
     return (
         <HeaderContainer>
             <HeaderCover />

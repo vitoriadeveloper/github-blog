@@ -10,19 +10,12 @@ import github from "../../assets/github.svg";
 import profile from "../../assets/profile.svg";
 import link from "../../assets/link.svg";
 import { api } from "../../api";
-import { useEffect, useState } from "react";
-
-interface UserData {
-    avatar_url: string;
-    bio: string;
-    followers: number;
-    html_url: string;
-    name: string;
-    login: string;
-}
+import { useEffect } from "react";
+import { useContext } from "use-context-selector";
+import { PostContext } from "../../contexts/PostContext";
 
 export function CardProfile() {
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const { userData, setUserData } = useContext(PostContext);
     useEffect(() => {
         async function fetchUserData() {
             try {
@@ -33,7 +26,7 @@ export function CardProfile() {
             }
         }
         fetchUserData();
-    }, []);
+    }, [setUserData]);
 
     return (
         <CardContainer>
