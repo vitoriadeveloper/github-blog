@@ -6,10 +6,14 @@ interface ContextProps {
     children: ReactNode;
 }
 interface PostData {
+    id: number;
     number: number;
     title: string;
     updated_at: string;
     body: string;
+    user: {
+        login: string;
+    };
 }
 
 interface UserData {
@@ -25,9 +29,11 @@ interface PostProviderProps {
     postData: PostData[];
     fetchPostData: (query?: string) => void;
     userData: UserData | null;
-    fetchUserData: (data: UserData | null) => void;
+    fetchUserData: () => void;
+    SearchPublications: (query?: string) => void;
 }
 const username = import.meta.env.VITE_USERNAME_GITHUB;
+const repoName = import.meta.env.VITE_REPO_NAME_GITHUB;
 export const PostContext = createContext({} as PostProviderProps);
 
 export function PostProvider({ children }: ContextProps) {
@@ -39,13 +45,28 @@ export function PostProvider({ children }: ContextProps) {
         setUserData(response.data);
     }
 
-    async function fetchPostData(query?: string) {
-        const response = await api.get(`repos/${username}/github-blog/issues`, {
-            params: {
-                q: query,
-            },
-        });
+    async function fetchPostData() {
+        const response = await api.get(
+            `repos/${username}/github-blog/issues`,
+            {},
+        );
         setPostData(response.data);
+    }
+
+    async function SearchPublications(query?: string) {
+        const response = await api.get(
+            `/search/issues?q=${query}%20repo:${username}/${repoName}`,
+            {
+                params: {
+                    q: query,
+                },
+            },
+        );
+        const filteredIssues = response.data.items.filter((issue: PostData) => {
+            return issue.user.login === `${username}`;
+        });
+
+        setPostData(filteredIssues);
     }
 
     useEffect(() => {
@@ -55,7 +76,13 @@ export function PostProvider({ children }: ContextProps) {
 
     return (
         <PostContext.Provider
-            value={{ postData, fetchPostData, userData, fetchUserData }}
+            value={{
+                postData,
+                fetchPostData,
+                userData,
+                fetchUserData,
+                SearchPublications,
+            }}
         >
             {children}
         </PostContext.Provider>

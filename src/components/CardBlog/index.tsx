@@ -14,7 +14,7 @@ export function CardBlog() {
             {postData ? (
                 postData.map((post) => {
                     return (
-                        <CardContainer key={post.number}>
+                        <CardContainer key={post.id}>
                             <Card>
                                 <CardContent className="row-space-between">
                                     <h3>{post.title}</h3>
@@ -29,10 +29,11 @@ export function CardBlog() {
                                     </span>
                                 </CardContent>
                                 <p>
-                                    {post.body.length > limitCharacters
+                                    {typeof post.body === "string" &&
+                                    post.body.length > limitCharacters
                                         ? post.body.slice(0, limitCharacters) +
                                           "..."
-                                        : post.body.length}
+                                        : post.body}
                                 </p>
                             </Card>
                         </CardContainer>

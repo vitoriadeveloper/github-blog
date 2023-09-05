@@ -2,12 +2,19 @@ import styled from "styled-components";
 
 export const Posts = styled.div`
     display: flex;
-    gap: 0.875rem;
+    max-width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
 `;
 export const CardContainer = styled.div`
     display: flex;
     gap: 2rem;
     padding: 0 0 4rem 0;
+    width: 416px;
+    max-width: 100%;
+    height: 260px;
+    justify-content: center;
 `;
 
 export const Card = styled.div`

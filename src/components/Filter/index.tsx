@@ -15,14 +15,14 @@ export function FilterCards() {
     const total = useContextSelector(PostContext, (context) => {
         return context.postData;
     });
-    const fetchPostData = useContextSelector(PostContext, (context) => {
-        return context.fetchPostData;
+    const searchPublications = useContextSelector(PostContext, (context) => {
+        return context.SearchPublications;
     });
     const { register, handleSubmit } = useForm<SearchFormInput>({
         resolver: zodResolver(searchFormSchema),
     });
     async function handleSearchPublications(data: SearchFormInput) {
-        fetchPostData(data.query);
+        searchPublications(data.query);
         console.log(data.query);
     }
 
