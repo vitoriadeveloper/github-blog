@@ -28,6 +28,7 @@ export const CardContainer = styled.div`
     margin-top: -94px;
     z-index: 2;
     gap: 2rem;
+    margin-bottom: 2rem;
 
     h4 {
         font-size: 1.5rem;
@@ -83,7 +84,6 @@ export const SectionCard = styled.div`
     width: 860px;
     max-width: 100%;
     display: flex;
-    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;

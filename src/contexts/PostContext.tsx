@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { createContext } from "use-context-selector";
 import { api } from "../api";
+import { useNavigate } from "react-router-dom";
 
 interface ContextProps {
     children: ReactNode;
@@ -14,6 +15,7 @@ interface PostData {
     user: {
         login: string;
     };
+    comments: number;
 }
 
 interface UserData {
@@ -31,6 +33,7 @@ interface PostProviderProps {
     userData: UserData | null;
     fetchUserData: () => void;
     SearchPublications: (query?: string) => void;
+    handleGetPosts: (postId: string) => void;
 }
 const username = import.meta.env.VITE_USERNAME_GITHUB;
 const repoName = import.meta.env.VITE_REPO_NAME_GITHUB;
@@ -39,7 +42,7 @@ export const PostContext = createContext({} as PostProviderProps);
 export function PostProvider({ children }: ContextProps) {
     const [postData, setPostData] = useState<PostData[]>([]);
     const [userData, setUserData] = useState<UserData | null>(null);
-
+    const navigate = useNavigate();
     async function fetchUserData() {
         const response = await api.get(`/users/${username}`);
         setUserData(response.data);
@@ -69,6 +72,12 @@ export function PostProvider({ children }: ContextProps) {
         setPostData(filteredIssues);
     }
 
+    async function handleGetPosts(postId: string) {
+        await api.get(`/repos/${username}/${repoName}/issues/${postId}`);
+
+        navigate(`${postId}`);
+    }
+
     useEffect(() => {
         fetchUserData();
         fetchPostData();
@@ -82,6 +91,7 @@ export function PostProvider({ children }: ContextProps) {
                 userData,
                 fetchUserData,
                 SearchPublications,
+                handleGetPosts,
             }}
         >
             {children}
