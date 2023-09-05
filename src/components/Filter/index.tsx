@@ -1,16 +1,42 @@
-import { PostContext } from "../../contexts/PostContext";
 import { FilterCard, TotalPublications } from "./styles";
-import { useContext } from "use-context-selector";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useContextSelector } from "use-context-selector";
+import { PostContext } from "../../contexts/PostContext";
+
+const searchFormSchema = z.object({
+    query: z.string(),
+});
+
+type SearchFormInput = z.infer<typeof searchFormSchema>;
 
 export function FilterCards() {
-    const { postData, setPostData } = useContext(PostContext);
+    const total = useContextSelector(PostContext, (context) => {
+        return context.postData;
+    });
+    const fetchPostData = useContextSelector(PostContext, (context) => {
+        return context.fetchPostData;
+    });
+    const { register, handleSubmit } = useForm<SearchFormInput>({
+        resolver: zodResolver(searchFormSchema),
+    });
+    async function handleSearchPublications(data: SearchFormInput) {
+        fetchPostData(data.query);
+        console.log(data.query);
+    }
+
     return (
-        <FilterCard>
+        <FilterCard onSubmit={handleSubmit(handleSearchPublications)}>
             <TotalPublications>
                 <h4>Publicações</h4>
-                <span>6 publicações</span>
+                <span>{total.length} publicações</span>
             </TotalPublications>
-            <input type="text" placeholder="Buscar conteúdo" />
+            <input
+                type="text"
+                placeholder="Buscar conteúdo"
+                {...register("query")}
+            />
         </FilterCard>
     );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FilterCard = styled.div`
+export const FilterCard = styled.form`
     display: flex;
     flex-direction: column;
     gap: 0.875rem;
