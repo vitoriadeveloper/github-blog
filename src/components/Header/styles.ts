@@ -11,7 +11,7 @@ export const HeaderCover = styled.div`
     height: 296px;
     width: 100%;
     max-height: 100%;
-    background-image: url("./src/assets/cover.svg");
+    background-image: url("src/assets/cover.svg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
