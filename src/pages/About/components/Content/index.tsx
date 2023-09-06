@@ -38,7 +38,7 @@ export function PostContent({ content }: PostContentProps) {
                     },
                 }}
             >
-                {!isLoading ? <Spinner /> : content}
+                {!isLoading ? content : ""}
             </ReactMarkdown>
         </div>
     );
