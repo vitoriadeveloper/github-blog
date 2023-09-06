@@ -4,12 +4,18 @@
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { useContextSelector } from "use-context-selector";
+import { PostContext } from "../../../../contexts/PostContext";
+import { Spinner } from "../../../../components/Spinner";
 
 interface PostContentProps {
     content: string;
 }
 
 export function PostContent({ content }: PostContentProps) {
+    const isLoading = useContextSelector(PostContext, (context) => {
+        return context.isLoading;
+    });
     return (
         <div>
             <ReactMarkdown
@@ -32,7 +38,7 @@ export function PostContent({ content }: PostContentProps) {
                     },
                 }}
             >
-                {content}
+                {!isLoading ? <Spinner /> : content}
             </ReactMarkdown>
         </div>
     );

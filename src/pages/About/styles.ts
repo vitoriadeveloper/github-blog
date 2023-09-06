@@ -3,17 +3,24 @@ import styled from "styled-components";
 export const HeaderContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    .aligment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
 `;
 
 export const HeaderCover = styled.div`
     height: 296px;
-    width: 100vw;
     max-height: 100%;
     background-image: url("./src/assets/cover.svg");
     background-position: center;
     background-size: cover;
     position: relative;
+    background-repeat: no-repeat;
 `;
 
 export const CardContainer = styled.div`
@@ -64,6 +71,7 @@ export const CardNav = styled.div`
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        text-decoration: none;
     }
 `;
 

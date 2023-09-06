@@ -34,6 +34,7 @@ interface PostProviderProps {
     fetchUserData: () => void;
     SearchPublications: (query?: string) => void;
     handleGetPosts: (postId: string) => void;
+    isLoading: boolean;
 }
 const username = import.meta.env.VITE_USERNAME_GITHUB;
 const repoName = import.meta.env.VITE_REPO_NAME_GITHUB;
@@ -42,13 +43,17 @@ export const PostContext = createContext({} as PostProviderProps);
 export function PostProvider({ children }: ContextProps) {
     const [postData, setPostData] = useState<PostData[]>([]);
     const [userData, setUserData] = useState<UserData | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
+
     async function fetchUserData() {
+        setIsLoading(true);
         const response = await api.get(`/users/${username}`);
         setUserData(response.data);
     }
 
     async function fetchPostData() {
+        setIsLoading(true);
         const response = await api.get(
             `repos/${username}/github-blog/issues`,
             {},
@@ -57,6 +62,7 @@ export function PostProvider({ children }: ContextProps) {
     }
 
     async function SearchPublications(query?: string) {
+        setIsLoading(true);
         const response = await api.get(
             `/search/issues?q=${query}%20repo:${username}/${repoName}`,
             {
@@ -73,6 +79,7 @@ export function PostProvider({ children }: ContextProps) {
     }
 
     async function handleGetPosts(postId: string) {
+        setIsLoading(true);
         await api.get(`/repos/${username}/${repoName}/issues/${postId}`);
 
         navigate(`${postId}`);
@@ -92,6 +99,7 @@ export function PostProvider({ children }: ContextProps) {
                 fetchUserData,
                 SearchPublications,
                 handleGetPosts,
+                isLoading,
             }}
         >
             {children}

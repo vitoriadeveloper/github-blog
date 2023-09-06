@@ -4,6 +4,8 @@ import { CardContainer, Card, CardContent, Posts } from "./styles";
 import { useContextSelector } from "use-context-selector";
 import { PostContext } from "../../contexts/PostContext";
 import { Link } from "react-router-dom";
+import { PostContent } from "../../pages/About/components/Content";
+import { Spinner } from "../Spinner";
 const customLinkStyle = {
     textDecoration: "none",
     color: "#AFC2D4",
@@ -38,22 +40,25 @@ export function CardBlog() {
                                             )}
                                         </span>
                                     </CardContent>
-                                    <p>
-                                        {typeof post.body === "string" &&
-                                        post.body.length > limitCharacters
-                                            ? post.body.slice(
-                                                  0,
-                                                  limitCharacters,
-                                              ) + "..."
-                                            : post.body}
-                                    </p>
+
+                                    <PostContent
+                                        content={
+                                            typeof post.body === "string" &&
+                                            post.body.length > limitCharacters
+                                                ? post.body.slice(
+                                                      0,
+                                                      limitCharacters,
+                                                  ) + "..."
+                                                : post.body
+                                        }
+                                    />
                                 </Card>
                             </CardContainer>
                         </Link>
                     );
                 })
             ) : (
-                <p>Carregando</p>
+                <Spinner />
             )}
         </Posts>
     );
