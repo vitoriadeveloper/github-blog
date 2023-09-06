@@ -41,4 +41,4 @@
 [![Linkedin](	https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/vitoria-carolina-7440611b3/)
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/vicmaromba/)
   
-<img src="https://media3.giphy.com/media/XtydbjSSwkC7K2zBTH/giphy.gif?cid=ecf05e47y50nagji0vm138ox7pdg7d0kl3fsp4ydixk393w3&ep=v1_gifs_gifId&rid=giphy.gif&ct=g"/>
+<img src="https://media3.giphy.com/media/XtydbjSSwkC7K2zBTH/giphy.gif?cid=ecf05e47y50nagji0vm138ox7pdg7d0kl3fsp4ydixk393w3&ep=v1_gifs_gifId&rid=giphy.gif&ct=g" width="100%"/>
