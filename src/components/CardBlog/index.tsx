@@ -12,7 +12,7 @@ const customLinkStyle = {
 };
 
 export function CardBlog() {
-    const limitCharacters = 100;
+    const limitCharacters = 50;
     const postData = useContextSelector(PostContext, (context) => {
         return context.postData;
     });
