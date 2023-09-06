@@ -29,9 +29,6 @@ export function About() {
     const postData = useContextSelector(PostContext, (context) => {
         return context.postData;
     });
-    const isLoading = useContextSelector(PostContext, (context) => {
-        return context.isLoading;
-    });
     const selectedPost = postData.find(
         (post) => post.number === Number(postId),
     );
@@ -42,70 +39,67 @@ export function About() {
     return (
         <HeaderContainer>
             <HeaderCover />
-            {!isLoading ? (
-                <Spinner />
-            ) : (
-                <div className="aligment">
-                    <CardContainer>
-                        <CardInfo>
-                            <CardNav>
-                                <Link to={"/"} className="link">
-                                    <CaretLeft
-                                        size={12}
-                                        color="#3294F8"
-                                        weight="bold"
-                                    />
-                                    <span>voltar</span>
-                                </Link>
-                            </CardNav>
-                            <CardNav>
-                                <a
-                                    href="https://github.com/vitoriadeveloper/github-blog/issues"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    ver no github
-                                </a>
-                                <img src={link} alt="" />
-                            </CardNav>
-                        </CardInfo>
-                        <h4>{selectedPost.title}</h4>
-                        <CardSocialMedia>
-                            <Link
-                                to={"https://github.com/vitoriadeveloper"}
-                                className="link"
-                            >
-                                <SocialMedia>
-                                    <img src={github} alt="" />
-                                    <span>{user?.login}</span>
-                                </SocialMedia>
+
+            <div className="aligment">
+                <CardContainer>
+                    <CardInfo>
+                        <CardNav>
+                            <Link to={"/"} className="link">
+                                <CaretLeft
+                                    size={12}
+                                    color="#3294F8"
+                                    weight="bold"
+                                />
+                                <span>voltar</span>
                             </Link>
+                        </CardNav>
+                        <CardNav>
+                            <a
+                                href="https://github.com/vitoriadeveloper/github-blog/issues"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                ver no github
+                            </a>
+                            <img src={link} alt="" />
+                        </CardNav>
+                    </CardInfo>
+                    <h4>{selectedPost.title}</h4>
+                    <CardSocialMedia>
+                        <Link
+                            to={"https://github.com/vitoriadeveloper"}
+                            className="link"
+                        >
                             <SocialMedia>
-                                <img src={calendar} alt="" />
-                                <span>
-                                    {" "}
-                                    {formatDistanceToNow(
-                                        new Date(selectedPost.updated_at),
-                                        {
-                                            addSuffix: true,
-                                            locale: ptBR,
-                                        },
-                                    )}
-                                </span>
+                                <img src={github} alt="" />
+                                <span>{user?.login}</span>
                             </SocialMedia>
-                            <SocialMedia>
-                                <img src={coment} alt="" />
-                                <span>{selectedPost.comments} comentários</span>
-                            </SocialMedia>
-                        </CardSocialMedia>
-                    </CardContainer>
+                        </Link>
+                        <SocialMedia>
+                            <img src={calendar} alt="" />
+                            <span>
+                                {" "}
+                                {formatDistanceToNow(
+                                    new Date(selectedPost.updated_at),
+                                    {
+                                        addSuffix: true,
+                                        locale: ptBR,
+                                    },
+                                )}
+                            </span>
+                        </SocialMedia>
+                        <SocialMedia>
+                            <img src={coment} alt="" />
+                            <span>{selectedPost.comments} comentários</span>
+                        </SocialMedia>
+                    </CardSocialMedia>
+                </CardContainer>
+                <SectionCard>
                     <SectionCard>
-                        <SectionCard>
-                            <PostContent content={selectedPost.body} />
-                        </SectionCard>
+                        <PostContent content={selectedPost.body} />
                     </SectionCard>
-                </div>
-            )}
+                </SectionCard>
+            </div>
         </HeaderContainer>
     );
 }
